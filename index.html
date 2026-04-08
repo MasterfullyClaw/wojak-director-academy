@@ -25,15 +25,15 @@
       <div class="route-card">
         <div class="route-icon">🤖</div>
         <h3>Auto Route</h3>
-        <p>Let the Wojak Director GPT guide you step by step. Answer questions, get all your prompts generated automatically.</p>
-        <a href="https://chatgpt.com/g/g-69d59f1df66c8191b3eb4af278b6df24-wojak-director" class="btn btn-gold" target="_blank" rel="noopener">Open Wojak Director →</a>
-        <div class="route-secondary-link" onclick="startGame()">Or learn how it works first →</div>
+        <p>A dedicated AI agent that walks you through everything. Just answer its questions — it builds all your prompts for you.</p>
+        <button class="btn btn-gold" onclick="showScreen('auto-route')">How It Works →</button>
       </div>
     </div>
 
-    <div class="landing-divider">— or explore both —</div>
+    <div class="landing-divider">— or start with the theory —</div>
 
-    <button class="btn btn-primary" onclick="startGame()">Explore All Lessons →</button>
+    <button class="btn btn-primary btn-learn" onclick="startGame()">🧠 Understand the System</button>
+    <p class="learn-sub">Learn how Wojak videos work — the concepts, the rules, the pipeline. No tools needed.</p>
   </div>
 
   <!-- LEVEL MAP SCREEN -->
@@ -71,6 +71,95 @@
       <div style="margin-top: 1.5rem; text-align: center;">
         <button class="btn btn-secondary" onclick="goToMap()">← Back to Lessons</button>
       </div>
+    </div>
+  </div>
+
+  <!-- AUTO ROUTE SCREEN -->
+  <div id="auto-route" class="screen">
+    <div class="level-header">
+      <button class="level-back" onclick="showScreen('landing')">←</button>
+      <div>
+        <div class="level-badge">Auto Route</div>
+        <h2 style="color: var(--porcelain); font-size: 1.4rem;">Wojak Director GPT</h2>
+      </div>
+    </div>
+
+    <!-- WHAT IS THIS -->
+    <div class="auto-section">
+      <h3>What Is This?</h3>
+      <div class="auto-card">
+        <p>The <strong>Wojak Director</strong> is a custom ChatGPT agent built specifically for creating Wojak-style cinematic AI videos. It already knows:</p>
+        <ul>
+          <li>The exact Wojak character description (face, body, style)</li>
+          <li>The Quiet Window color grade and cinematic lighting system</li>
+          <li>All camera angles, expressions, and visual rules</li>
+          <li>How to generate image prompts AND video prompts</li>
+          <li>The consistency rules that keep your scenes looking like one video</li>
+        </ul>
+        <p style="margin-top: 0.75rem;">You don't need to know any of this yourself. The agent handles it. You just answer its questions about YOUR story.</p>
+      </div>
+    </div>
+
+    <!-- HOW TO USE IT -->
+    <div class="auto-section">
+      <h3>How to Use It</h3>
+<pre class="ascii-art">
+  ┌─────────────────────────────────────────────────────┐
+  │                                                     │
+  │   ① Open the Wojak Director GPT link below          │
+  │                     ↓                               │
+  │   ② It asks: "What is your video about?"            │
+  │      You answer with your story idea                │
+  │                     ↓                               │
+  │   ③ It asks about each scene — one at a time:       │
+  │      • What's happening?                            │
+  │      • Where?                                       │
+  │      • What emotion?                                │
+  │                     ↓                               │
+  │   ④ It generates a complete image prompt            │
+  │      You copy it → paste into your AI image tool    │
+  │      → save the generated image                     │
+  │                     ↓                               │
+  │   ⑤ Repeat for each scene                           │
+  │                     ↓                               │
+  │   ⑥ It generates video prompts (JSON)               │
+  │      You copy → paste into Kling 3.0 / Seedance     │
+  │      → upload your image → get video clip            │
+  │                     ↓                               │
+  │   ⑦ Assemble all clips in CapCut / DaVinci          │
+  │      → FINAL VIDEO                                  │
+  │                                                     │
+  └─────────────────────────────────────────────────────┘
+</pre>
+    </div>
+
+    <!-- TIPS -->
+    <div class="auto-section">
+      <h3>Tips for Best Results</h3>
+      <div class="auto-tips">
+        <div class="tip-card">
+          <span class="tip-icon">💡</span>
+          <p><strong>Know your story first.</strong> The GPT will ask you — have your concept, scene ideas, and wardrobe ready before starting.</p>
+        </div>
+        <div class="tip-card">
+          <span class="tip-icon">🔄</span>
+          <p><strong>Go scene by scene.</strong> Don't rush. Generate one image, check it, then move to the next.</p>
+        </div>
+        <div class="tip-card">
+          <span class="tip-icon">👕</span>
+          <p><strong>Same wardrobe every scene.</strong> Tell the GPT once and it locks it. This is what keeps your character consistent.</p>
+        </div>
+        <div class="tip-card">
+          <span class="tip-icon">📱</span>
+          <p><strong>Green screen for devices.</strong> If a scene has a phone or laptop, tell the GPT — it'll add green screen automatically for you to replace later.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAUNCH BUTTON -->
+    <div class="auto-launch">
+      <a href="https://chatgpt.com/g/g-69d59f1df66c8191b3eb4af278b6df24-wojak-director" class="btn btn-gold btn-launch" target="_blank" rel="noopener">🚀 Open Wojak Director GPT</a>
+      <p class="launch-note">Opens in ChatGPT. Requires a ChatGPT account (free or Plus).</p>
     </div>
   </div>
 
