@@ -1,6 +1,9 @@
 /* ============================================================
    WOJAK DIRECTOR ACADEMY — Game Engine
    Vanilla JS · No frameworks · localStorage persistence
+
+   Flow: Landing → Level Map → Level (Intro → Lesson) → Back to Map
+   All levels are always unlocked. Viewing a lesson marks it complete.
    ============================================================ */
 
 // ------------------------------------
@@ -29,22 +32,7 @@ const LEVELS = {
       {
         highlight: "Strong concept = clear sentence + target emotion + scene count."
       }
-    ],
-    challenge: {
-      type: "CHOICE",
-      prompt: "Which of these is the strongest Wojak video concept?",
-      options: [
-        { text: "A guy wakes up and does stuff", label: "A" },
-        { text: "The daily routine of someone who chose discipline over comfort — from 5am alarm to midnight grind", label: "B" },
-        { text: "A motivational video about success", label: "C" }
-      ],
-      correct: "B",
-      explanations: {
-        A: "Too vague — no emotion, no visual direction, no scene structure. \"Does stuff\" gives you nothing to film.",
-        B: "Clear subject, emotional arc (discipline vs comfort), and a built-in scene structure (5am to midnight). This is a concept you can actually produce.",
-        C: "Too generic — \"motivational\" and \"success\" are abstract. You can't storyboard abstract ideas."
-      }
-    }
+    ]
   },
 
   2: {
@@ -75,22 +63,7 @@ const LEVELS = {
       {
         highlight: "One scene = one action + one camera angle + one expression."
       }
-    ],
-    challenge: {
-      type: "CHOICE",
-      prompt: "This scene description has a problem. What is it?\n\n\"Character is cooking breakfast while checking his phone and petting his dog\"",
-      options: [
-        { text: "The environment isn't described enough", label: "A" },
-        { text: "There are three actions — split into separate scenes", label: "B" },
-        { text: "The camera angle is missing", label: "C" }
-      ],
-      correct: "B",
-      explanations: {
-        A: "Environment detail matters, but it's not the core problem here. The scene has a structural issue.",
-        B: "Cooking, checking phone, petting dog — that's three separate actions. The golden rule: one action per scene. Split this into three scenes and each one renders cleanly.",
-        C: "Camera angle is important, but it's added later. The fundamental problem is the action overload."
-      }
-    }
+    ]
   },
 
   3: {
@@ -115,24 +88,7 @@ const LEVELS = {
       {
         highlight: "Lock the wardrobe. Lock the motifs. Lock the time. Then write."
       }
-    ],
-    challenge: {
-      type: "CHOICE",
-      prompt: "Which scene breaks the consistency lock?",
-      options: [
-        { text: "Scene A: Character in dark crewneck, gym, morning", label: "A" },
-        { text: "Scene B: Character in dark crewneck, café, afternoon", label: "B" },
-        { text: "Scene C: Character in red hoodie, bedroom, night", label: "C" },
-        { text: "Scene D: Character in dark crewneck, kitchen, evening", label: "D" }
-      ],
-      correct: "C",
-      explanations: {
-        A: "Consistent — dark crewneck wardrobe, logical morning setting.",
-        B: "Consistent — same wardrobe, time has progressed naturally to afternoon.",
-        C: "The wardrobe changed to a red hoodie with no story reason. This breaks the Consistency Lock. The viewer's brain will register that something is off.",
-        D: "Consistent — same wardrobe, time has progressed naturally to evening."
-      }
-    }
+    ]
   },
 
   4: {
@@ -162,24 +118,7 @@ const LEVELS = {
       {
         highlight: "5 blanks. That's your creative space. Everything else is engineered."
       }
-    ],
-    challenge: {
-      type: "CHOICE",
-      prompt: "Which part of the prompt do students NEVER change?",
-      options: [
-        { text: "The environment description", label: "A" },
-        { text: "The wardrobe", label: "B" },
-        { text: "The Wojak face description and Quiet Window color grade", label: "C" },
-        { text: "The camera angle", label: "D" }
-      ],
-      correct: "C",
-      explanations: {
-        A: "Environment is one of the 5 blanks — students fill this every scene.",
-        B: "Wardrobe is student-defined (then locked via the Consistency Lock, but initially your choice).",
-        C: "The Wojak face description and Quiet Window color grade are permanently locked. They define the visual identity. Changing them breaks the Wojak look entirely.",
-        D: "Camera angle is one of the 5 blanks — students pick this per scene."
-      }
-    }
+    ]
   },
 
   5: {
@@ -213,22 +152,7 @@ const LEVELS = {
       {
         highlight: "Motion = emotion. Static = calm. Push-in = tension. Pan = reveal."
       }
-    ],
-    challenge: {
-      type: "CHOICE",
-      prompt: "What camera motion fits a calm morning wake-up scene?",
-      options: [
-        { text: "Very slow pan right, subtle and smooth", label: "A" },
-        { text: "None — fully static locked-off camera", label: "B" },
-        { text: "Very slow push-in zoom", label: "C" }
-      ],
-      correct: "B",
-      explanations: {
-        A: "Panning is for revealing environments or showing scale. A wake-up scene is intimate and personal — no need to reveal.",
-        B: "A calm morning wake-up is quiet and still. A static locked-off camera matches that energy perfectly — no movement, just presence. Stillness mirrors the scene's emotion.",
-        C: "Push-in builds tension and dramatic weight. A calm morning wake-up has no tension to build."
-      }
-    }
+    ]
   },
 
   6: {
@@ -258,22 +182,7 @@ const LEVELS = {
       {
         highlight: "Learn manual first. Then use auto for speed. Both produce the same quality."
       }
-    ],
-    challenge: {
-      type: "CHOICE",
-      prompt: "When should you use the Auto route (Wojak Director GPT)?",
-      options: [
-        { text: "When you want maximum control over every prompt detail", label: "A" },
-        { text: "When you want a guided conversation that generates all prompts for you", label: "B" },
-        { text: "When you need to generate images directly", label: "C" }
-      ],
-      correct: "B",
-      explanations: {
-        A: "Maximum control over every detail is the Manual route. You fill the templates yourself, you decide everything.",
-        B: "The Auto route (Wojak Director GPT) is a guided conversation — you answer questions about your video concept, and it generates all the prompts for you. Same quality, less manual work.",
-        C: "Wojak Director GPT doesn't generate images — it generates the prompts that you then feed to an image generator. The GPT is a prompt factory, not an image factory."
-      }
-    }
+    ]
   }
 };
 
@@ -288,28 +197,24 @@ function loadProgress() {
     const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
     if (data && Array.isArray(data.completedLevels)) return data;
   } catch (e) { /* corrupted data — reset */ }
-  return { completedLevels: [], currentLevel: 1 };
+  return { completedLevels: [] };
 }
 
 function saveProgress(progress) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
 }
 
+/** Mark a level as completed (student viewed the lesson content) */
 function completeLevel(levelNum) {
   const progress = loadProgress();
   if (!progress.completedLevels.includes(levelNum)) {
     progress.completedLevels.push(levelNum);
     progress.completedLevels.sort((a, b) => a - b);
   }
-  // Advance currentLevel to next incomplete level
-  progress.currentLevel = Math.min(levelNum + 1, 6);
   saveProgress(progress);
 }
 
-function isLevelUnlocked(levelNum) {
-  return true; // All levels always accessible
-}
-
+/** Check if a level has been visited/completed */
 function isLevelCompleted(levelNum) {
   return loadProgress().completedLevels.includes(levelNum);
 }
@@ -326,7 +231,7 @@ function showScreen(id) {
   if (target) target.classList.add("active");
 }
 
-/** Within #level-screen, show a specific phase (intro|lesson) */
+/** Within #level-screen, show a specific phase (intro | lesson) */
 function showPhase(phase) {
   document.querySelectorAll("#level-screen .phase").forEach(p => p.classList.remove("active"));
   const target = document.querySelector(`#level-screen .phase-${phase}`);
@@ -342,6 +247,8 @@ function goToMap() {
 
 // ------------------------------------
 // LEVEL MAP RENDERING
+// Two states per card: completed (with checkmark) or unvisited.
+// All levels are always clickable — no locking.
 // ------------------------------------
 function renderMap() {
   const progress = loadProgress();
@@ -353,14 +260,10 @@ function renderMap() {
   for (let i = 1; i <= 6; i++) {
     const level = LEVELS[i];
     const completed = progress.completedLevels.includes(i);
-    const unlocked = isLevelUnlocked(i);
-    const current = unlocked && !completed;
 
     const card = document.createElement("div");
     card.className = "level-card";
     if (completed) card.classList.add("completed");
-    else if (current) card.classList.add("current");
-    else if (!unlocked) card.classList.add("locked");
 
     card.innerHTML = `
       <div class="level-num">Level ${i}</div>
@@ -368,10 +271,8 @@ function renderMap() {
       <div class="level-desc">${level.desc}</div>
     `;
 
-    // Only allow clicking unlocked (current or completed) levels
-    if (unlocked) {
-      card.addEventListener("click", () => startLevel(i));
-    }
+    // All levels are always clickable
+    card.addEventListener("click", () => startLevel(i));
 
     grid.appendChild(card);
   }
@@ -386,6 +287,7 @@ function renderMap() {
 
 // ------------------------------------
 // LEVEL SCREEN — CONTENT LOADING
+// Two phases per level: intro → lesson
 // ------------------------------------
 let activeLevelNum = null;
 
@@ -396,7 +298,7 @@ function startLevel(n) {
 
   showScreen("level-screen");
 
-  // Update header
+  // Update header badge
   const badge = document.querySelector(".level-badge");
   if (badge) badge.textContent = `Level ${n} — ${level.name}`;
 
@@ -470,7 +372,7 @@ function renderFinalScreen() {
 
 
 // ------------------------------------
-// BRIDGE FUNCTIONS (called by HTML onclick)
+// BRIDGE FUNCTIONS
 // ------------------------------------
 function startGame() {
   renderMap();
