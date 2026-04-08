@@ -413,6 +413,55 @@ body::after {
 }
 .route-icon { font-size: 3rem; }
 
+/* === MANUAL ROUTE === */
+#manual-route { max-width: 800px; margin: 0 auto; }
+
+.manual-intro { margin-bottom: 2rem; }
+.manual-intro p { color: var(--text-dim); line-height: 1.6; margin-bottom: 1.25rem; }
+
+.manual-steps {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1rem;
+}
+.step {
+  display: flex; align-items: center; gap: 0.5rem;
+  background: var(--bg-card); border: 1px solid var(--slate);
+  border-radius: 8px; padding: 0.6rem 1rem; font-size: 0.85rem; color: var(--text);
+}
+.step-num {
+  background: var(--teal); color: var(--bg-deep);
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700; flex-shrink: 0;
+}
+.step-arrow { color: var(--slate); font-size: 1.2rem; }
+
+.prompt-section {
+  background: var(--bg-card); border: 1px solid var(--slate);
+  border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem;
+}
+.prompt-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 1rem; margin-bottom: 1rem;
+}
+.prompt-header h3 { color: var(--porcelain); font-size: 1.1rem; margin-bottom: 0.25rem; }
+.prompt-desc { color: var(--text-dim); font-size: 0.85rem; line-height: 1.5; }
+
+.btn-copy { white-space: nowrap; flex-shrink: 0; padding: 0.6rem 1.25rem; font-size: 0.85rem; }
+.btn-copy.copied { background: var(--green-soft); }
+
+.prompt-code {
+  background: var(--bg-deep); border: 1px solid rgba(112, 128, 144, 0.3);
+  border-radius: 8px; padding: 1.25rem;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 0.75rem; line-height: 1.6; color: var(--text);
+  white-space: pre-wrap; word-wrap: break-word;
+  max-height: 400px; overflow-y: auto;
+}
+.prompt-code::-webkit-scrollbar { width: 6px; }
+.prompt-code::-webkit-scrollbar-track { background: var(--bg-deep); }
+.prompt-code::-webkit-scrollbar-thumb { background: var(--slate); border-radius: 3px; }
+
 /* === LANDING ROUTE CARDS === */
 #landing .route-cards {
   margin-top: 0.5rem;

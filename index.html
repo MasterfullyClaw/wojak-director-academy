@@ -19,8 +19,8 @@
       <div class="route-card">
         <div class="route-icon">📝</div>
         <h3>Manual Route</h3>
-        <p>Use fill-in-the-blank prompt templates. You control every detail. Paste prompts into any AI image tool.</p>
-        <button class="btn btn-secondary" onclick="startGame()">Learn the Templates →</button>
+        <p>Copy a prompt template, paste into any LLM (ChatGPT, Gemini, Claude). It generates your Wojak image + video prompts.</p>
+        <button class="btn btn-secondary" onclick="showScreen('manual-route')">Get the Templates →</button>
       </div>
       <div class="route-card">
         <div class="route-icon">🤖</div>
@@ -71,6 +71,61 @@
       <div style="margin-top: 1.5rem; text-align: center;">
         <button class="btn btn-secondary" onclick="goToMap()">← Back to Lessons</button>
       </div>
+    </div>
+  </div>
+
+  <!-- MANUAL ROUTE SCREEN -->
+  <div id="manual-route" class="screen">
+    <div class="level-header">
+      <button class="level-back" onclick="showScreen('landing')">←</button>
+      <div>
+        <div class="level-badge">Manual Route</div>
+        <h2 style="color: var(--porcelain); font-size: 1.4rem;">Prompt Templates</h2>
+      </div>
+    </div>
+
+    <div class="manual-intro">
+      <p>Copy a prompt below and paste it into <strong>any LLM</strong> (ChatGPT, Gemini, Claude, etc.). The LLM will ask you what scenes you want, then generate ready-to-use prompts for you.</p>
+      <div class="manual-steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <span>Copy the prompt below</span>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <span>Paste into any LLM</span>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <span>LLM generates your image/video prompts</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMAGE PROMPT TEMPLATE -->
+    <div class="prompt-section">
+      <div class="prompt-header">
+        <div>
+          <h3>🖼️ Image Prompt Generator</h3>
+          <p class="prompt-desc">Paste this into any LLM. It will ask you about your scenes and generate Wojak image prompts you paste into your AI image tool.</p>
+        </div>
+        <button class="btn btn-primary btn-copy" onclick="copyPrompt('image')">Copy Prompt</button>
+      </div>
+      <pre class="prompt-code" id="image-prompt"></pre>
+    </div>
+
+    <!-- VIDEO PROMPT TEMPLATE -->
+    <div class="prompt-section">
+      <div class="prompt-header">
+        <div>
+          <h3>🎥 Video Prompt Generator</h3>
+          <p class="prompt-desc">After generating your images, paste this into any LLM. It will create video prompts for Kling 3.0 or Seedance 2.0.</p>
+        </div>
+        <button class="btn btn-primary btn-copy" onclick="copyPrompt('video')">Copy Prompt</button>
+      </div>
+      <pre class="prompt-code" id="video-prompt"></pre>
     </div>
   </div>
 
