@@ -307,9 +307,7 @@ function completeLevel(levelNum) {
 }
 
 function isLevelUnlocked(levelNum) {
-  if (levelNum === 1) return true;
-  const progress = loadProgress();
-  return progress.completedLevels.includes(levelNum - 1);
+  return true; // All levels always accessible
 }
 
 function isLevelCompleted(levelNum) {
@@ -328,7 +326,7 @@ function showScreen(id) {
   if (target) target.classList.add("active");
 }
 
-/** Within #level-screen, show a specific phase (intro|lesson|challenge|complete) */
+/** Within #level-screen, show a specific phase (intro|lesson) */
 function showPhase(phase) {
   document.querySelectorAll("#level-screen .phase").forEach(p => p.classList.remove("active"));
   const target = document.querySelector(`#level-screen .phase-${phase}`);
@@ -434,92 +432,11 @@ function startLevel(n) {
         `;
       }
     });
-    lessonHTML += `<button class="btn btn-primary" style="margin-top:1.5rem" data-action="go-challenge">Take the Challenge →</button>`;
+    lessonHTML += `<button class="btn btn-secondary" style="margin-top:1.5rem" data-action="go-map">← Back to Lessons</button>`;
     lessonPhase.innerHTML = lessonHTML;
   }
 
-  // -- CHALLENGE PHASE --
-  buildChallenge(level.challenge);
-
-  // -- COMPLETE PHASE --
-  const completePhase = document.querySelector(".phase-complete");
-  if (completePhase) {
-    const isFinal = n === 6;
-    completePhase.innerHTML = `
-      <div class="complete-icon">🏆</div>
-      <div class="complete-title">Level ${n} Complete!</div>
-      <div class="complete-text">You've mastered "${level.name}". ${isFinal ? "You've completed the entire academy!" : "Ready for the next level."}</div>
-      <button class="btn btn-gold" data-action="${isFinal ? "go-final" : "go-map"}">${isFinal ? "See Your Routes →" : "Continue to Map →"}</button>
-    `;
-  }
-
   showPhase("intro");
-}
-
-
-// ------------------------------------
-// CHALLENGE ENGINE
-// ------------------------------------
-function buildChallenge(challenge) {
-  const phase = document.querySelector(".phase-challenge");
-  if (!phase) return;
-
-  // Format prompt — preserve newlines for display
-  const promptHTML = challenge.prompt.replace(/\n/g, "<br>");
-
-  let optionsHTML = challenge.options.map(opt => {
-    return `<button class="challenge-option" data-label="${opt.label}">${opt.label}. ${opt.text}</button>`;
-  }).join("");
-
-  phase.innerHTML = `
-    <div class="challenge-prompt">${promptHTML}</div>
-    <div class="challenge-options">${optionsHTML}</div>
-    <div class="challenge-feedback"></div>
-    <button class="btn btn-primary challenge-continue" style="margin-top:1.5rem;display:none" data-action="challenge-passed">Continue →</button>
-  `;
-
-  // Wire up option clicks via delegation on the options container
-  const optionsContainer = phase.querySelector(".challenge-options");
-  const feedbackEl = phase.querySelector(".challenge-feedback");
-  const continueBtn = phase.querySelector(".challenge-continue");
-  let solved = false;
-
-  optionsContainer.addEventListener("click", (e) => {
-    const btn = e.target.closest(".challenge-option");
-    if (!btn || solved) return;
-
-    const label = btn.dataset.label;
-    const isCorrect = label === challenge.correct;
-
-    // Clear previous attempt styling
-    optionsContainer.querySelectorAll(".challenge-option").forEach(b => {
-      b.classList.remove("wrong", "selected");
-    });
-
-    if (isCorrect) {
-      // -- CORRECT --
-      solved = true;
-      btn.classList.add("correct");
-      feedbackEl.className = "challenge-feedback show success";
-      feedbackEl.textContent = challenge.explanations[label];
-
-      // Show continue button after a short delay
-      setTimeout(() => {
-        continueBtn.style.display = "inline-flex";
-      }, 1000);
-    } else {
-      // -- WRONG --
-      btn.classList.add("wrong");
-      feedbackEl.className = "challenge-feedback show fail";
-      feedbackEl.textContent = challenge.explanations[label] + " Try again.";
-
-      // Remove wrong styling after 1s to let them retry
-      setTimeout(() => {
-        btn.classList.remove("wrong");
-        feedbackEl.className = "challenge-feedback";
-      }, 1500);
-    }
-  });
 }
 
 
@@ -560,22 +477,6 @@ function startGame() {
   showScreen("level-map");
 }
 
-function completeChallenge() {
-  if (activeLevelNum) {
-    completeLevel(activeLevelNum);
-  }
-  showPhase("complete");
-}
-
-function afterComplete() {
-  if (activeLevelNum >= 6) {
-    renderFinalScreen();
-    showScreen("final-screen");
-  } else {
-    goToMap();
-  }
-}
-
 // ------------------------------------
 // GLOBAL EVENT DELEGATION
 // ------------------------------------
@@ -596,19 +497,11 @@ document.addEventListener("click", (e) => {
       break;
 
     case "go-lesson":
-      showPhase("lesson");
-      break;
-
-    case "go-challenge":
-      showPhase("challenge");
-      break;
-
-    case "challenge-passed":
-      // Mark level complete and show completion phase
+      // Mark level complete when user enters the lesson
       if (activeLevelNum) {
         completeLevel(activeLevelNum);
       }
-      showPhase("complete");
+      showPhase("lesson");
       break;
 
     case "go-final":

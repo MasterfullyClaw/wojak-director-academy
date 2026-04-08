@@ -369,6 +369,17 @@ body::after {
   margin-bottom: 2rem;
 }
 
+/* === LANDING ROUTE CARDS === */
+.landing-routes { width: 100%; max-width: 700px; margin: 0.5rem 0; }
+
+.landing-divider {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  margin: 1.5rem 0;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
 /* === FINAL SCREEN === */
 #final-screen { text-align: center; gap: 2rem; justify-content: center; }
 
@@ -401,6 +412,30 @@ body::after {
   margin-bottom: 1.5rem;
 }
 .route-icon { font-size: 3rem; }
+
+/* === LANDING ROUTE CARDS === */
+#landing .route-cards {
+  margin-top: 0.5rem;
+}
+
+.route-secondary-link {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--teal);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.route-secondary-link:hover {
+  color: var(--porcelain);
+  text-decoration: underline;
+}
+
+.landing-divider {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  margin: 0.25rem 0;
+}
 
 /* === RESPONSIVE === */
 @media (max-width: 640px) {

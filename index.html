@@ -14,7 +14,26 @@
     <div class="wojak-hero">🗿</div>
     <h1 class="landing-title">Wojak Director <span>Academy</span></h1>
     <p class="landing-sub">Learn to create cinematic Wojak-style AI videos. 6 levels. Zero experience needed. Master the workflow, then choose your weapon.</p>
-    <button class="btn btn-primary" onclick="startGame()">Begin Training →</button>
+
+    <div class="route-cards">
+      <div class="route-card">
+        <div class="route-icon">📝</div>
+        <h3>Manual Route</h3>
+        <p>Use fill-in-the-blank prompt templates. You control every detail. Paste prompts into any AI image tool.</p>
+        <button class="btn btn-secondary" onclick="startGame()">Learn the Templates →</button>
+      </div>
+      <div class="route-card">
+        <div class="route-icon">🤖</div>
+        <h3>Auto Route</h3>
+        <p>Let the Wojak Director GPT guide you step by step. Answer questions, get all your prompts generated automatically.</p>
+        <a href="https://chatgpt.com/g/g-69d59f1df66c8191b3eb4af278b6df24-wojak-director" class="btn btn-gold" target="_blank" rel="noopener">Open Wojak Director →</a>
+        <div class="route-secondary-link" onclick="startGame()">Or learn how it works first →</div>
+      </div>
+    </div>
+
+    <div class="landing-divider">— or explore both —</div>
+
+    <button class="btn btn-primary" onclick="startGame()">Explore All Lessons →</button>
   </div>
 
   <!-- LEVEL MAP SCREEN -->
@@ -50,28 +69,8 @@
         <!-- Lesson cards injected by JS -->
       </div>
       <div style="margin-top: 1.5rem; text-align: center;">
-        <button class="btn btn-primary" onclick="showPhase('challenge')">Test Your Knowledge →</button>
+        <button class="btn btn-secondary" onclick="goToMap()">← Back to Lessons</button>
       </div>
-    </div>
-
-    <!-- CHALLENGE PHASE -->
-    <div class="phase phase-challenge" id="phase-challenge">
-      <p class="challenge-prompt" id="challenge-prompt"></p>
-      <div class="challenge-options" id="challenge-options">
-        <!-- Options injected by JS -->
-      </div>
-      <div class="challenge-feedback" id="challenge-feedback"></div>
-      <div id="challenge-next" style="margin-top: 1.5rem; text-align: center; display: none;">
-        <button class="btn btn-primary" onclick="completeChallenge()">Continue →</button>
-      </div>
-    </div>
-
-    <!-- COMPLETE PHASE -->
-    <div class="phase phase-complete" id="phase-complete">
-      <div class="complete-icon" id="complete-icon"></div>
-      <h2 class="complete-title" id="complete-title"></h2>
-      <p class="complete-text" id="complete-text"></p>
-      <button class="btn btn-primary" id="complete-btn" onclick="afterComplete()">Next Level →</button>
     </div>
   </div>
 
