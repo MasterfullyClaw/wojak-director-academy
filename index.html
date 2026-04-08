@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wojak Director Academy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- LANDING SCREEN -->
+  <div id="landing" class="screen active">
+    <!-- Big Wojak face emoji/art as hero -->
+    <div class="wojak-hero">🗿</div>
+    <h1 class="landing-title">Wojak Director <span>Academy</span></h1>
+    <p class="landing-sub">Learn to create cinematic Wojak-style AI videos. 6 levels. Zero experience needed. Master the workflow, then choose your weapon.</p>
+    <button class="btn btn-primary" onclick="startGame()">Begin Training →</button>
+  </div>
+
+  <!-- LEVEL MAP SCREEN -->
+  <div id="level-map" class="screen">
+    <h2 class="map-title">Your Journey</h2>
+    <div class="map-progress"><div class="map-progress-fill" id="progress-bar"></div></div>
+    <div class="level-grid" id="level-grid">
+      <!-- 6 level cards rendered by JS -->
+    </div>
+  </div>
+
+  <!-- LEVEL SCREEN (content loaded dynamically) -->
+  <div id="level-screen" class="screen">
+    <div class="level-header">
+      <button class="level-back" onclick="goToMap()">←</button>
+      <div>
+        <div class="level-badge" id="level-badge">Level 1</div>
+        <h2 class="level-title" id="level-title" style="color: var(--porcelain); font-size: 1.4rem;"></h2>
+      </div>
+    </div>
+
+    <!-- INTRO PHASE -->
+    <div class="phase phase-intro" id="phase-intro">
+      <div class="intro-icon" id="intro-icon"></div>
+      <h2 id="intro-title"></h2>
+      <p id="intro-text"></p>
+      <button class="btn btn-primary" onclick="showPhase('lesson')">Let's Learn →</button>
+    </div>
+
+    <!-- LESSON PHASE -->
+    <div class="phase phase-lesson" id="phase-lesson">
+      <div id="lesson-content">
+        <!-- Lesson cards injected by JS -->
+      </div>
+      <div style="margin-top: 1.5rem; text-align: center;">
+        <button class="btn btn-primary" onclick="showPhase('challenge')">Test Your Knowledge →</button>
+      </div>
+    </div>
+
+    <!-- CHALLENGE PHASE -->
+    <div class="phase phase-challenge" id="phase-challenge">
+      <p class="challenge-prompt" id="challenge-prompt"></p>
+      <div class="challenge-options" id="challenge-options">
+        <!-- Options injected by JS -->
+      </div>
+      <div class="challenge-feedback" id="challenge-feedback"></div>
+      <div id="challenge-next" style="margin-top: 1.5rem; text-align: center; display: none;">
+        <button class="btn btn-primary" onclick="completeChallenge()">Continue →</button>
+      </div>
+    </div>
+
+    <!-- COMPLETE PHASE -->
+    <div class="phase phase-complete" id="phase-complete">
+      <div class="complete-icon" id="complete-icon"></div>
+      <h2 class="complete-title" id="complete-title"></h2>
+      <p class="complete-text" id="complete-text"></p>
+      <button class="btn btn-primary" id="complete-btn" onclick="afterComplete()">Next Level →</button>
+    </div>
+  </div>
+
+  <!-- FINAL SCREEN -->
+  <div id="final-screen" class="screen">
+    <div class="wojak-hero">🎬</div>
+    <h1 class="landing-title" style="font-size: clamp(1.5rem, 4vw, 2.5rem);">Training Complete</h1>
+    <p class="landing-sub">You've mastered the Wojak video workflow. Now choose how you want to create.</p>
+    <div class="route-cards">
+      <div class="route-card">
+        <div class="route-icon">📝</div>
+        <h3>Manual Route</h3>
+        <p>Use the prompt templates yourself. Fill in 5 blanks per scene, paste into any AI image tool. Full creative control.</p>
+        <a href="https://github.com/MasterfullyClaw/wojak-director-academy" class="btn btn-secondary" target="_blank">Get Templates</a>
+      </div>
+      <div class="route-card">
+        <div class="route-icon">🤖</div>
+        <h3>Auto Route</h3>
+        <p>Let the Wojak Director GPT guide you. Answer questions, get all prompts generated automatically. Fastest path.</p>
+        <a href="https://chatgpt.com/g/g-69d59f1df66c8191b3eb4af278b6df24-wojak-director" class="btn btn-gold" target="_blank">Open Wojak Director →</a>
+      </div>
+    </div>
+    <button class="btn btn-secondary" style="margin-top: 1rem;" onclick="goToMap()">← Back to Levels</button>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
