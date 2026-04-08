@@ -84,24 +84,109 @@
       </div>
     </div>
 
-    <div class="manual-intro">
-      <p>Copy a prompt below and paste it into <strong>any LLM</strong> (ChatGPT, Gemini, Claude, etc.). The LLM will ask you what scenes you want, then generate ready-to-use prompts for you.</p>
-      <div class="manual-steps">
-        <div class="step">
-          <span class="step-num">1</span>
-          <span>Copy the prompt below</span>
+    <!-- HOW IT WORKS — ASCII DIAGRAM -->
+    <div class="ascii-section">
+      <h3>How the Manual Route Works</h3>
+<pre class="ascii-art">
+  ┌─────────────────────────────────────────────────────────────┐
+  │                    YOUR STORY IDEA                          │
+  │              "I want to make a video about..."              │
+  └──────────────────────┬──────────────────────────────────────┘
+                         │
+                         ▼
+  ┌─────────────────────────────────────────────────────────────┐
+  │              ① PREREQUISITES  (you decide)                  │
+  │                                                             │
+  │   ✦ Video concept ─── one sentence                         │
+  │   ✦ Scene count ───── 6-10 scenes                          │
+  │   ✦ Wardrobe ──────── same outfit in every scene           │
+  │   ✦ For each scene:                                        │
+  │       • one action                                         │
+  │       • one environment                                    │
+  │       • one emotion                                        │
+  └──────────────────────┬──────────────────────────────────────┘
+                         │
+          ┌──────────────┴──────────────┐
+          ▼                             ▼
+  ┌───────────────────┐     ┌───────────────────────┐
+  │  ② IMAGE PROMPT   │     │  ④ VIDEO PROMPT       │
+  │                   │     │                       │
+  │  Copy prompt      │     │  Copy prompt          │
+  │       ↓           │     │       ↓               │
+  │  Paste into LLM   │     │  Paste into LLM       │
+  │  (ChatGPT/Gemini/ │     │  (ChatGPT/Gemini/     │
+  │   Claude/etc.)    │     │   Claude/etc.)        │
+  │       ↓           │     │       ↓               │
+  │  LLM asks you     │     │  LLM asks you         │
+  │  about each scene │     │  about each scene     │
+  │       ↓           │     │       ↓               │
+  │  Outputs image    │     │  Outputs video JSON   │
+  │  prompt per scene │     │  per scene            │
+  └────────┬──────────┘     └───────────┬───────────┘
+           │                            │
+           ▼                            ▼
+  ┌───────────────────┐     ┌───────────────────────┐
+  │  ③ GENERATE       │     │  ⑤ GENERATE           │
+  │                   │     │                       │
+  │  Paste image      │     │  Paste JSON into      │
+  │  prompt into AI   │     │  Kling 3.0 or         │
+  │  image tool       │     │  Seedance 2.0         │
+  │  (any tool works) │     │  + upload your image  │
+  │       ↓           │     │       ↓               │
+  │  ★ Wojak image    │     │  ★ Video clip         │
+  └────────┬──────────┘     └───────────┬───────────┘
+           │                            │
+           └──────────┬─────────────────┘
+                      ▼
+          ┌───────────────────────┐
+          │  ⑥ ASSEMBLE           │
+          │                       │
+          │  Import all clips     │
+          │  into CapCut or       │
+          │  DaVinci Resolve      │
+          │       ↓               │
+          │  ★ FINAL VIDEO        │
+          └───────────────────────┘
+</pre>
+    </div>
+
+    <!-- PREREQUISITES -->
+    <div class="prereq-section">
+      <h3>① Prerequisites — Decide These First</h3>
+      <p class="prereq-intro">Before you touch the prompts, you need to know what you're making. Answer these yourself — the prompt will ask you for them.</p>
+      <div class="prereq-grid">
+        <div class="prereq-card">
+          <div class="prereq-icon">💡</div>
+          <h4>Video Concept</h4>
+          <p>One sentence. What is this video about?</p>
+          <div class="prereq-example">"The daily routine of someone who chose discipline over comfort"</div>
         </div>
-        <div class="step-arrow">→</div>
-        <div class="step">
-          <span class="step-num">2</span>
-          <span>Paste into any LLM</span>
+        <div class="prereq-card">
+          <div class="prereq-icon">🎭</div>
+          <h4>Target Emotion</h4>
+          <p>What should the viewer feel at the end?</p>
+          <div class="prereq-example">Motivated? Reflective? Angry? Inspired? Pick one.</div>
         </div>
-        <div class="step-arrow">→</div>
-        <div class="step">
-          <span class="step-num">3</span>
-          <span>LLM generates your image/video prompts</span>
+        <div class="prereq-card">
+          <div class="prereq-icon">🎬</div>
+          <h4>Scene Count</h4>
+          <p>How many scenes? 6-10 is the sweet spot for a 60-90 second video.</p>
+          <div class="prereq-example">8 scenes = 8 images = 8 video clips</div>
+        </div>
+        <div class="prereq-card">
+          <div class="prereq-icon">👕</div>
+          <h4>Wardrobe</h4>
+          <p>One outfit description that stays the same in EVERY scene.</p>
+          <div class="prereq-example">"Dark crewneck sweater, tailored dark pants, white sneakers, smartwatch"</div>
+        </div>
+        <div class="prereq-card">
+          <div class="prereq-icon">📋</div>
+          <h4>Scene Ideas</h4>
+          <p>For each scene, know: one action + one environment + one emotion.</p>
+          <div class="prereq-example">Scene 1: "Waking up, bedroom, peaceful" · Scene 2: "Working at laptop, cafe, determined"</div>
         </div>
       </div>
+      <div class="prereq-note">Once you have these, the prompts do the rest. You paste the prompt, the LLM asks you questions, you answer with your prerequisites, it generates your final prompts.</div>
     </div>
 
     <!-- IMAGE PROMPT TEMPLATE -->

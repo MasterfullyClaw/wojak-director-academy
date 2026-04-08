@@ -436,6 +436,89 @@ body::after {
 }
 .step-arrow { color: var(--slate); font-size: 1.2rem; }
 
+/* ASCII art diagram */
+.ascii-section {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+.ascii-section h3 {
+  color: var(--porcelain);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+.ascii-art {
+  background: var(--bg-deep);
+  border: 1px solid rgba(95, 158, 160, 0.25);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 0.7rem;
+  line-height: 1.4;
+  color: var(--teal);
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* Prerequisites */
+.prereq-section {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+.prereq-section h3 {
+  color: var(--porcelain);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+.prereq-intro {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+.prereq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.prereq-card {
+  background: var(--bg-card);
+  border: 1px solid var(--slate);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+.prereq-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.prereq-card h4 {
+  color: var(--porcelain);
+  font-size: 0.95rem;
+  margin-bottom: 0.35rem;
+}
+.prereq-card p {
+  color: var(--text);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+.prereq-example {
+  background: var(--bg-deep);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  color: var(--teal);
+  font-style: italic;
+  line-height: 1.4;
+}
+.prereq-note {
+  background: rgba(95, 158, 160, 0.08);
+  border: 1px solid rgba(95, 158, 160, 0.2);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  color: var(--teal);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
 .prompt-section {
   background: var(--bg-card); border: 1px solid var(--slate);
   border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem;
